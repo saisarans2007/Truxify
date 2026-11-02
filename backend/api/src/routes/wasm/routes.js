@@ -1,4 +1,11 @@
 // backend/api/src/routes/wasm/routes.js
+import express from 'express';
+
+const router = express.Router();
+
+function calculateEta({ distance, speed, trafficFactor = 0 }) {
+  return distance / (Math.max(speed, 1e-6) * Math.max(1 - trafficFactor, 0.1));
+}
 
 router.post('/eta', async (req, res) => {
   const { distance, speed, trafficFactor } = req.body;
@@ -11,9 +18,11 @@ router.post('/eta', async (req, res) => {
   }
 
   try {
-    const eta = calculate_eta({ distance, speed, trafficFactor });
+    const eta = calculateEta({ distance, speed, trafficFactor });
     return res.status(200).json({ success: true, eta });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
 });
+
+export default router;

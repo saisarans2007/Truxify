@@ -1,4 +1,5 @@
 const escrowService = require('../services/escrowService');
+const logger = require('../middleware/logger.js').default;
 
 const depositEscrow = async (req, res) => {
     try {
