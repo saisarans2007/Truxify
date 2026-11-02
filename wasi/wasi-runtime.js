@@ -39,8 +39,6 @@ class WASIRuntime {
             ],
             allowedDomains: [
                 'api.truxify.com',
-                'localhost',
-                '127.0.0.1'
             ],
             maxFileSize: 100 * 1024 * 1024, // 100MB
             maxMemory: 256 * 1024 * 1024, // 256MB
@@ -403,9 +401,5 @@ function parseWasiJsonOutput(stdout) {
     );
 }
 
-// Replace:
-// const result = JSON.parse(stdout);
-//
-// With:
-const result = parseWasiJsonOutput(stdout);
+export { parseWasiJsonOutput };
 export default new WASIRuntime();
